@@ -1,4 +1,4 @@
-
+import Navbar from './Components/Navbar'
 import './App.css'
 
 function App() {
@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <h1 className='text-3xl font-bold underline'>QUEST GEAR</h1>
+      <Navbar />
     </>
   )
 }
