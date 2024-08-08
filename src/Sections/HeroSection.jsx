@@ -1,11 +1,16 @@
-import Card from "../Components/Card"
+
+import Slider from "../Components/Slider";
+import { FaAngleLeft } from "react-icons/fa6";
+import { FaAngleRight } from "react-icons/fa6";
+
+import { useState } from "react";
 
 export default function HeroSection() {
 
 
     const characters = [
         {
-            name: "Warrior",
+            name: "Knight",
             role: "Frontline combatant focused on physical strength and defense.",
             img: "https://images.stockcake.com/public/c/8/e/c8eb7c33-2132-4095-a74e-91bb355f430a_large/knight-stars-comet-stockcake.jpg",
             weapons: ["Swords", "Axes", "Hammers", "Shields"],
@@ -50,16 +55,61 @@ export default function HeroSection() {
         }
     ];
 
-    return (
-        <>
-            Hero section
-            {
-                characters.map((character) => {
-                    return <Card characterData={character} />
-                })
-            }
+    const [current, setCurrent] = useState(0);
 
-            <button className="bg-blue-500 text-white hover:cursor-pointer hover:bg-blue-700 px-4 py-2 m-4">SELECT</button>
-        </>
+    const nextSlide = () => {
+        if (current === characters.length - 1) {
+            setCurrent(0);
+        }
+        else {
+            setCurrent((prev) => prev + 1)
+        }
+    }
+
+    const prevSlide = () => {
+        if (current === 0) {
+            setCurrent(characters.length - 1);
+        }
+        else {
+            setCurrent((prev) => prev - 1)
+        }
+    }
+
+    const selectCharacter = () => {
+        alert("You chose " + characters[current].name)
+    }
+
+    return (
+        <div className="">
+            <h1 className="text-center text-blue-500 text-5xl m-8">Choose your Character</h1>
+
+
+            <div className="relative">
+
+                <div className="w-[50%] m-auto flex flex-col">
+                    <div>
+                        <Slider characters={characters} current={current} />
+                    </div>
+
+                    <button className="bg-blue-500 text-white hover:cursor-pointer hover:bg-blue-700 px-4 py-2 w-40 m-auto my-8" onClick={selectCharacter}>SELECT</button>
+
+
+
+                </div>
+
+                <div className="text-blue-500 text-5xl absolute top-0 flex h-3/4 w-full items-center justify-between px-72">
+                    <button className="hover:text-blue-700" onClick={prevSlide}><FaAngleLeft /></button>
+                    <button className="hover:text-blue-700" onClick={nextSlide}><FaAngleRight /></button>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+        </div>
     )
 }

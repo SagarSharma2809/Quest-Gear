@@ -1,10 +1,12 @@
+
+
 export default function Card({ characterData }) {
     return (
-        <div className="border border-blue-500 border-2 m-4 flex w-1/2">
+        <div className="border border-blue-500 border-2 w-fit flex flex-col md:flex-row">
 
 
-            <div className="w-1/2 m-4">
-                <h2 className="text-4xl">{characterData.name}</h2>
+            <div className="w-96 m-4">
+                <h2 className="text-3xl mb-4 font-bold">{characterData.name}</h2>
                 <h3 className="text-xl"> {characterData.role} </h3>
                 <div className="my-4"> <span className="font-bold">Weapons:</span>  {characterData.weapons.join(", ")} </div>
                 <h3 className="text-xl">Skills</h3>
@@ -14,11 +16,11 @@ export default function Card({ characterData }) {
                     ))}
                 </ul>
 
-                {/* <button className="bg-blue-500 text-white hover:cursor-pointer hover:bg-blue-700 px-4 py-2 my-4">SELECT</button> */}
+
 
             </div>
 
-            <div className="w-1/2">
+            <div className="w-full md:w-96">
                 <img src={characterData.img} alt="" className="h-full" />
             </div>
 
