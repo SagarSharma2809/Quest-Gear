@@ -8,7 +8,7 @@ export default function Slider({ characters, current }) {
         <div className="overflow-hidden relative">
 
 
-            <div className={`flex transition ease-out duration-400`} style={{ transform: `translateX(-${current * 104.6}%)` }}>
+            <div className={`flex transition ease-out duration-400`} style={{ transform: `translateX(-${current * 100}%)` }}>
 
                 {
                     characters.map((character) => {

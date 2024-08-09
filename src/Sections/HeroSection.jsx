@@ -86,18 +86,18 @@ export default function HeroSection() {
 
             <div className="relative">
 
-                <div className="w-[50%] m-auto flex flex-col">
+                <div className="w-3/4 md:w-1/2 m-auto flex flex-col">
                     <div>
                         <Slider characters={characters} current={current} />
                     </div>
 
-                    <button className="bg-blue-500 text-white hover:cursor-pointer hover:bg-blue-700 px-4 py-2 w-40 m-auto my-8" onClick={selectCharacter}>SELECT</button>
+                    <button className="bg-blue-500 text-white hover:cursor-pointer hover:bg-blue-700 px-4 py-2 w-40 m-auto my-4 md:my-8" onClick={selectCharacter}>SELECT</button>
 
 
 
                 </div>
 
-                <div className="text-blue-500 text-5xl absolute top-0 flex h-3/4 w-full items-center justify-between px-72">
+                <div className="text-blue-500 text-5xl absolute top-0 flex h-3/4 w-full items-center justify-between xs:px-8 md:px-32 lg:px-44">
                     <button className="hover:text-blue-700" onClick={prevSlide}><FaAngleLeft /></button>
                     <button className="hover:text-blue-700" onClick={nextSlide}><FaAngleRight /></button>
                 </div>
