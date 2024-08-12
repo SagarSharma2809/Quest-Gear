@@ -5,7 +5,7 @@ import { FaAngleRight } from "react-icons/fa6";
 
 import { useState } from "react";
 
-export default function HeroSection() {
+export default function HeroSection({ getCharName }) {
 
 
     const characters = [
@@ -76,12 +76,16 @@ export default function HeroSection() {
     }
 
     const selectCharacter = () => {
-        alert("You chose " + characters[current].name)
+        const name = characters[current].name;
+
+        // alert("You chose " + characters[current].name)
+
+        getCharName(name);
     }
 
     return (
-        <div className="">
-            <h1 className="text-center text-blue-500 text-5xl m-8">Choose your Character</h1>
+        <div className="lg:h-screen">
+            <h1 className="text-center text-blue-500 text-5xl m-10">Choose your Character</h1>
 
 
             <div className="relative">
@@ -90,6 +94,7 @@ export default function HeroSection() {
                     <div>
                         <Slider characters={characters} current={current} />
                     </div>
+
 
                     <button className="bg-blue-500 text-white hover:cursor-pointer hover:bg-blue-700 px-4 py-2 w-40 m-auto my-4 md:my-8" onClick={selectCharacter}>SELECT</button>
 
