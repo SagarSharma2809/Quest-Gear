@@ -4,7 +4,7 @@ const Navbar = () => {
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const navItems = ['Home', 'About', 'Service', 'Contact Us'];
+    const navItems = ['Home', 'Practice', 'Play Online', 'Contact Us'];
 
     const navClasses = isOpen ? "flex flex-col" : "hidden";
 

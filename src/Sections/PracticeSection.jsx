@@ -1,4 +1,4 @@
-
+import Paragraph from "../Components/Paragraph"
 
 
 export default function PracticeSection({ charName }) {
@@ -8,28 +8,28 @@ export default function PracticeSection({ charName }) {
             emoji: "⚔️",
             hearts: "❤️❤️❤️❤️❤️",
             idle: '/Img/Knight Idle.gif',
-            width: "2/3"
+            width: '40'
         },
 
         Archer: {
             emoji: "🏹",
             hearts: "❤️❤️❤️",
             idle: '/Img/Archer Idle.gif',
-            width: "1/2"
+            width: '40'
         },
 
         Mage: {
             emoji: "📖",
             hearts: "❤️❤️",
             idle: '/Img/Mage Idle.gif',
-            width: "1/2"
+            width: '40'
         },
 
         Rogue: {
             emoji: "🔪",
             hearts: "❤️❤️❤️❤️",
             idle: "Img/Rogue Idle.gif",
-            width: "1/2"
+            width: '40'
         }
     }
 
@@ -47,6 +47,16 @@ export default function PracticeSection({ charName }) {
                 <img src={charStats[charName].idle} alt="" className={`w-${charStats[charName].width} my-4`} />
 
             </div>
+
+            <div className="text-2xl w-1/2 m-auto">
+                <div className="text-white">
+                    <Paragraph charName={charName} />
+                </div>
+
+
+                <input type="text" className="w-full my-4 p-2" placeholder="Start typing here..." autoFocus />
+            </div>
+
 
 
 
