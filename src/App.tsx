@@ -2,15 +2,14 @@ import Navbar from './Components/Navbar'
 import HeroSection from './Sections/HeroSection'
 import PracticeSection from './Sections/PracticeSection'
 import { useState } from 'react'
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import './App.css'
 
 function App() {
 
-  const [charName, setCharName] = useState("Knight");
+  const [charName, setCharName] = useState<string>("Knight");
 
-  const getCharName = (name) => {
+  const getCharName = (name: string) => {
     setCharName(name);
   }
 
