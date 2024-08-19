@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 
 const defaultPara = "Some coaly judges are thought of simply as breads. The matin shear reveals itself as a tameless verse to those who look. The literature would have us believe that an eastbound ball is not but a musician. The first clonic plough is, in its own way, a hovercraft.The literature would have us believe that a lubric game is not but a flavor. Unfortunately, that is wrong; on the contrary, authors often misinterpret the vessel as a slier kitchen, when in actuality it feels more like a choking doubt. It's an undeniable fact, really; the unblessed multimedia comes from a recurved cast. A fitful astronomy without baskets is truly a chauffeur of sleekit patricias";
 
-export default function Paragraph({ charName }) {
+interface ParagraphProps {
+    charName: "Knight" | "Archer" | "Mage" | "Rogue";
+    userInput: string | null;
+}
+export default function Paragraph({ charName, userInput }: ParagraphProps) {
 
     const [paragraph, setParagraph] = useState(defaultPara);
 
@@ -19,7 +23,16 @@ export default function Paragraph({ charName }) {
 
     return (
         <>
-            {paragraph}
+            <div className='relative'>
+                {paragraph}
+
+                <div className='absolute top-0 text-black'>
+                    {userInput}
+                </div>
+            </div>
+
+
+
         </>
 
 

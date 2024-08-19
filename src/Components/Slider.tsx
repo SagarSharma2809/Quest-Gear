@@ -1,9 +1,19 @@
 import Card from "./Card"
 
+interface Character {
+    name: string;
+    role: string;
+    img: string;
+    weapons: string[];
+    skills: Record<string, string | undefined>;
+}
 
+interface SliderProps {
+    characters: Character[];
+    current: number;
+}
 
-
-export default function Slider({ characters, current }) {
+export default function Slider({ characters, current }: SliderProps) {
     return (
         <div className="overflow-hidden relative">
 

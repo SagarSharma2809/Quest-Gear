@@ -5,10 +5,18 @@ import { FaAngleRight } from "react-icons/fa6";
 
 import { useState } from "react";
 
-export default function HeroSection({ getCharName }) {
+interface Character {
+    name: "Knight" | "Archer" | "Mage" | "Rogue";
+    role: string;
+    img: string;
+    weapons: string[];
+    skills: Record<string, string>;
+}
+
+export default function HeroSection({ getCharName }: { getCharName: (name: "Knight" | "Archer" | "Mage" | "Rogue") => void }) {
 
 
-    const characters = [
+    const characters: Character[] = [
         {
             name: "Knight",
             role: "Frontline combatant focused on physical strength and defense.",

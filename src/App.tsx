@@ -7,9 +7,9 @@ import './App.css'
 
 function App() {
 
-  const [charName, setCharName] = useState<string>("Knight");
+  const [charName, setCharName] = useState<"Knight" | "Archer" | "Mage" | "Rogue">("Knight");
 
-  const getCharName = (name: string) => {
+  const getCharName = (name: "Knight" | "Archer" | "Mage" | "Rogue") => {
     setCharName(name);
   }
 

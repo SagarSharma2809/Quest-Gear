@@ -1,36 +1,47 @@
+import { useState } from "react";
+
 import Paragraph from "../Components/Paragraph"
 
+const charStats = {
+    Knight: {
+        emoji: "⚔️",
+        hearts: "❤️❤️❤️❤️❤️",
+        idle: '/Img/Knight Idle.gif',
+        width: '40'
+    },
 
-export default function PracticeSection({ charName }) {
+    Archer: {
+        emoji: "🏹",
+        hearts: "❤️❤️❤️",
+        idle: '/Img/Archer Idle.gif',
+        width: '40'
+    },
 
-    const charStats = {
-        Knight: {
-            emoji: "⚔️",
-            hearts: "❤️❤️❤️❤️❤️",
-            idle: '/Img/Knight Idle.gif',
-            width: '40'
-        },
+    Mage: {
+        emoji: "📖",
+        hearts: "❤️❤️",
+        idle: '/Img/Mage Idle.gif',
+        width: '40'
+    },
 
-        Archer: {
-            emoji: "🏹",
-            hearts: "❤️❤️❤️",
-            idle: '/Img/Archer Idle.gif',
-            width: '40'
-        },
+    Rogue: {
+        emoji: "🔪",
+        hearts: "❤️❤️❤️❤️",
+        idle: "Img/Rogue Idle.gif",
+        width: '40'
+    }
+}
 
-        Mage: {
-            emoji: "📖",
-            hearts: "❤️❤️",
-            idle: '/Img/Mage Idle.gif',
-            width: '40'
-        },
+interface PracticeSectionProps {
+    charName: keyof typeof charStats;
+}
 
-        Rogue: {
-            emoji: "🔪",
-            hearts: "❤️❤️❤️❤️",
-            idle: "Img/Rogue Idle.gif",
-            width: '40'
-        }
+export default function PracticeSection({ charName }: PracticeSectionProps) {
+
+    const [input, setInput] = useState<string>("");
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInput(() => event.target.value);
     }
 
     return (
@@ -50,11 +61,13 @@ export default function PracticeSection({ charName }) {
 
             <div className="text-2xl w-1/2 m-auto">
                 <div className="text-white">
-                    <Paragraph charName={charName} />
+                    <Paragraph charName={charName} userInput={input} />
                 </div>
 
 
-                <input type="text" className="w-full my-4 p-2" placeholder="Start typing here..." autoFocus />
+                <input type="text" className="w-full my-4 p-2" placeholder="Start typing here..." value={input} onChange={handleChange} autoFocus />
+
+
             </div>
 
 

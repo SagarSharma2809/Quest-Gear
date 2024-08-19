@@ -1,6 +1,16 @@
+interface Character {
+    name: string;
+    role: string;
+    img: string;
+    weapons: string[];
+    skills: Record<string, string | undefined>
+}
 
+interface cardProps {
+    characterData: Character;
+}
 
-export default function Card({ characterData }) {
+export default function Card({ characterData }: cardProps) {
     return (
         <div className="border border-blue-500 border-2 min-w-[100%] h-full flex flex-col lg:flex-row">
 
