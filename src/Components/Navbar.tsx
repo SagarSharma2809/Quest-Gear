@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import { useState } from "react";
 
 const Navbar = () => {
@@ -14,7 +16,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="bg-blue-500 px-2 py-2 md:justify-center md:item-center text-white">
+            <nav className="bg-blue-500 px-2 py-2 md:justify-center md:item-center text-white top-0 sticky">
                 <div className=" container mx-auto flex justify-between">
 
                     <button className="hover:bg-white hover:bg-opacity-20 hover:border hover:border-white hover:border-2 md:hidden" onClick={openMenu}>
@@ -35,12 +37,16 @@ const Navbar = () => {
 
                     {/* navigation links */}
 
-                    <ul className={`hidden md:flex space-x-4`}>
+                    <ul className={`hidden md:flex md:items-center md:justify-center space-x-12`}>
                         {navItems.map((item) => {
                             return (
-                                <li className="hover:bg-white hover:bg-opacity-50">
-                                    <a href={`#${item}`}>{item}</a>
-                                </li>
+                                <NavLink to={item === "Home" ? "/" : `/${item}`} className={({ isActive }) =>
+                                    isActive ? "bg-white text-blue-500  rounded" : "hover:bg-white hover:bg-opacity-50 rounded"
+                                }>
+                                    <li className="hover:bg-white hover:bg-opacity-50 p-1">
+                                        {item}
+                                    </li>
+                                </NavLink>
 
                             )
                         })}
@@ -59,13 +65,19 @@ const Navbar = () => {
                     <ul className={`${navClasses} md:hidden`}>
                         {navItems.map((item) => {
                             return (
-                                <li className="hover:bg-white hover:bg-opacity-20 hover:cursor-pointer w-full">
-                                    <a href={'#' + item}>{item}</a>
-                                </li>
+                                <NavLink to={item === "Home" ? "/" : `/${item}`} className={({ isActive }) =>
+                                    isActive ? "bg-white text-blue-500 rounded" : "hover:bg-white hover:bg-opacity-50 rounded"
+                                }>
+                                    <li className="hover:bg-white hover:bg-opacity-20 hover:cursor-pointer w-full">
+
+                                        {item}
+
+                                    </li>
+                                </NavLink>
                             )
                         })}
                     </ul>}
-            </nav>
+            </nav >
         </>
     )
 }

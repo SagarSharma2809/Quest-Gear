@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Paragraph from "../Components/Paragraph"
+import { Heading } from "../Components/Heading";
 
 const charStats = {
     Knight: {
@@ -36,7 +37,7 @@ interface PracticeSectionProps {
     charName: keyof typeof charStats;
 }
 
-export default function PracticeSection({ charName }: PracticeSectionProps) {
+export default function PracticePage({ charName }: PracticeSectionProps) {
 
     const [input, setInput] = useState<string>("");
 
@@ -45,10 +46,13 @@ export default function PracticeSection({ charName }: PracticeSectionProps) {
     }
 
     return (
-        <div className="p-4 bg-blue-500 h-screen">
-            <h1 className="text-5xl text-center text-white">Practice Zone</h1>
+        <div className="p-4 h-screen">
+            {/* <div className="m-10 text-center">
+                <Heading text="Practice Zone" />
+            </div> */}
 
-            <div className="w-1/5 p-4 text-white flex flex-col">
+
+            <div className="w-1/5 p-4 flex flex-col">
 
                 <div className="text-xl font-bold flex items-center">
                     <div>{charName.toUpperCase()}</div>
@@ -60,7 +64,7 @@ export default function PracticeSection({ charName }: PracticeSectionProps) {
             </div>
 
             <div className="text-2xl w-1/2 m-auto">
-                <div className="text-white">
+                <div className="">
                     <Paragraph charName={charName} userInput={input} />
                 </div>
 

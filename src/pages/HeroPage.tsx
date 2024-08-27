@@ -1,7 +1,11 @@
 
+import { Link } from "react-router-dom";
+
 import Slider from "../Components/Slider";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
+import { Button } from "../Components/Button";
+import { Heading } from "../Components/Heading";
 
 import { useState } from "react";
 
@@ -13,7 +17,7 @@ interface Character {
     skills: Record<string, string>;
 }
 
-export default function HeroSection({ getCharName }: { getCharName: (name: "Knight" | "Archer" | "Mage" | "Rogue") => void }) {
+export default function HeroPage({ getCharName }: { getCharName: (name: "Knight" | "Archer" | "Mage" | "Rogue") => void }) {
 
 
     const characters: Character[] = [
@@ -93,7 +97,10 @@ export default function HeroSection({ getCharName }: { getCharName: (name: "Knig
 
     return (
         <div className="lg:h-screen">
-            <h1 className="text-center text-blue-500 text-5xl m-10">Choose your Character</h1>
+            <div className="m-10 text-center">
+                <Heading text="Choose your Character" />
+            </div>
+
 
 
             <div className="relative">
@@ -103,8 +110,12 @@ export default function HeroSection({ getCharName }: { getCharName: (name: "Knig
                         <Slider characters={characters} current={current} />
                     </div>
 
+                    <div className="m-auto">
+                        <Link to='/Practice'><Button text="SELECT" handleClick={selectCharacter} /></Link>
+                    </div>
 
-                    <button className="bg-blue-500 text-white hover:cursor-pointer hover:bg-blue-700 px-4 py-2 w-40 m-auto my-4 md:my-8" onClick={selectCharacter}>SELECT</button>
+
+
 
 
 
