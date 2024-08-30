@@ -1,16 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 // Define a TS type for the data we'll be using
-interface Character {
+interface character {
     name: "Knight" | "Archer" | "Mage" | "Rogue";
     role: string;
     img: string;
     weapons: string[];
     skills: Record<string, string>;
+    emoji: string;
+    hearts: string;
+    idle: string;
+    width: string;
+    bgImg: string;
 }
 
 // Create an initial state value for the reducer, with that type
-const initialState: Character[] = [
+const initialState: character[] = [
     {
         name: "Knight",
         role: "Frontline combatant focused on physical strength and defense.",
@@ -20,7 +25,12 @@ const initialState: Character[] = [
             "Physical Attacks": "Strong melee attacks and combat prowess.",
             "Durability": "High health and defense to withstand enemy attacks.",
             "Tactics": "Basic combat strategies and formations to control the battlefield."
-        }
+        },
+        emoji: "⚔️",
+        hearts: "❤️❤️❤️❤️❤️",
+        idle: '/Img/Knight Idle.gif',
+        width: '40',
+        bgImg: "/Img/Knight bg.avif",
     },
     {
         name: "Archer",
@@ -31,7 +41,13 @@ const initialState: Character[] = [
             "Ranged Attacks": "Skilled in attacking from a distance with high accuracy.",
             "Stealth": "Ability to remain hidden and strike unexpectedly.",
             "Nature Connection": "Use of traps and familiarity with natural environments for strategic advantage."
-        }
+        },
+        emoji: "🏹",
+        hearts: "❤️❤️❤️",
+        idle: '/Img/Archer Idle.gif',
+        width: '40',
+        bgImg: "/Img/Archer bg.avif"
+
     },
     {
         name: "Mage",
@@ -42,7 +58,12 @@ const initialState: Character[] = [
             "Elemental Spells": "Mastery over fire, ice, lightning, and other elements to attack or defend.",
             "Teleportation": "Ability to move instantly across distances or escape danger.",
             "Arcane Knowledge": "Access to powerful spells and magical lore for a wide range of effects."
-        }
+        },
+        emoji: "📖",
+        hearts: "❤️❤️",
+        idle: '/Img/Mage Idle.gif',
+        width: '40',
+        bgImg: "/Img/Mage bg.avif"
     },
     {
         name: "Rogue",
@@ -53,7 +74,12 @@ const initialState: Character[] = [
             "Stealth": "Expertise in moving unseen and launching surprise attacks.",
             "Agility": "Quick movements and evasion techniques to avoid enemy strikes.",
             "Poison": "Use of toxins to weaken or incapacitate foes over time."
-        }
+        },
+        emoji: "🔪",
+        hearts: "❤️❤️❤️❤️",
+        idle: '/Img/Rogue Idle.gif',
+        width: '40',
+        bgImg: "/Img/Rogue bg.avif"
     }
 ];
 

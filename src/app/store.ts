@@ -1,7 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
+import characterReducer from '../features/Character/characterSlice'
+import CurrentCharacterReducer from '../features/Character/CurrentCharacterSlice'
 
 export const store = configureStore({
-    reducer: {}
+    reducer: {
+        characters: characterReducer,
+        current: CurrentCharacterReducer
+    }
 })
 
 export type AppStore = typeof store

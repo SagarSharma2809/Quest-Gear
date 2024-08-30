@@ -5,7 +5,7 @@ interface HeadingProps {
 export const Heading = ({ text }: HeadingProps) => {
     return (
         <>
-            <h1 className="text-blue-500 text-5xl"> {text} </h1>
+            <h1 className="text-white opacity-80 font-bold text-5xl"> {text} </h1>
         </>
     )
 }
