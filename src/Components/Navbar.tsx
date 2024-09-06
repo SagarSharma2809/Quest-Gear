@@ -20,7 +20,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="bg-blue-950 px-2 py-2 md:justify-center md:item-center text-white text-opacity-80 top-0 sticky">
+            <nav className="bg-blue-950 px-2 py-2 md:justify-center md:item-center text-white text-opacity-60 top-0 sticky">
                 <div className=" container mx-auto flex justify-between">
 
                     <button className="hover:bg-white hover:bg-opacity-20 hover:border hover:border-white hover:border-2 md:hidden" onClick={openMenu}>
@@ -35,7 +35,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <div>
                         <img src="" alt="" />
-                        <div className="text-xl font-bold">Quest Gear</div>
+                        <div className="text-xl text-white font-bold">Quest Gear</div>
                     </div>
 
 
@@ -45,9 +45,9 @@ const Navbar = () => {
                         {navItems.map((item) => {
                             return (
                                 <NavLink to={item === "Home" ? "/" : `/${item}/${characters[current].name}`} className={({ isActive }) =>
-                                    isActive ? "bg-white text-blue-950 opacity-80 hover:text-blue-900 rounded" : ""
+                                    isActive ? "text-white p-1" : "hover:text-white p-1"
                                 }>
-                                    <li className="hover:text-white p-1">
+                                    <li className=''>
                                         {item}
                                     </li>
                                 </NavLink>
@@ -58,8 +58,8 @@ const Navbar = () => {
 
                     {/* Sign up buttons */}
                     <div>
-                        <button className="m-1">Sign Up</button>
-                        <button className="m-1">Login</button>
+                        <button className="text-opacity-70 hover:text-white m-1">Sign Up</button>
+                        <button className="text-opacity-70 hover:text-white m-1">Login</button>
                     </div>
 
 

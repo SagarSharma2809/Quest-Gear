@@ -9,6 +9,7 @@ export default function PracticePage() {
 
     const [input, setInput] = useState<string>("");
     const [restart, setRestart] = useState<boolean>(false);
+    const [typingSpeedData, setTypingSpeedData] = useState<any>({ speed: null, accuracy: null });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInput(() => event.target.value);
@@ -18,6 +19,14 @@ export default function PracticePage() {
         setRestart(!restart);
         setInput("");
     };
+
+
+
+    function updateSpeed(wpm: any, accuracy: any) {
+        setTypingSpeedData(() => {
+            return { speed: wpm, accuracy: accuracy }
+        })
+    }
 
     const PracticePageStyles: React.CSSProperties = {
         backgroundImage: `url("${characters[current].bgImg}")`,
@@ -60,7 +69,7 @@ export default function PracticePage() {
 
                 <div className="text-2xl w-1/2 m-auto flex flex-col justify-center items-center">
                     <div className="">
-                        <Paragraph userInput={input} restart={restart} />
+                        <Paragraph userInput={input} restart={restart} updateSpeed={updateSpeed} />
                     </div>
 
                     <input
@@ -70,6 +79,7 @@ export default function PracticePage() {
                         value={input}
                         onChange={handleChange}
                         autoFocus
+
                     />
 
                     <button
@@ -78,6 +88,17 @@ export default function PracticePage() {
                     >
                         <VscDebugRestart />
                     </button>
+
+
+
+                    {typingSpeedData.speed &&
+                        <div className=''>
+                            <div>Typing Speed:<span className=''>{typingSpeedData.speed} wpm</span></div>
+                            <div>Accuracy: <span className="">{typingSpeedData.accuracy}%</span></div>
+
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>
