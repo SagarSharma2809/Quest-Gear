@@ -10,6 +10,9 @@ interface character {
     emoji: string;
     hearts: string;
     idle: string;
+    takeHit: string;
+    attack1: string;
+    specialAttack: string;
     width: string;
     bgImg: string;
 }
@@ -29,6 +32,9 @@ const initialState: character[] = [
         emoji: "⚔️",
         hearts: "❤️❤️❤️❤️❤️",
         idle: '/Img/Knight Idle.gif',
+        takeHit: '/Img/Knight take hit.gif',
+        attack1: '/Img/Knight attack 1.gif',
+        specialAttack: '/Img/Knight special attack.gif',
         width: '40',
         bgImg: "/Img/Knight bg.avif",
     },
@@ -45,6 +51,9 @@ const initialState: character[] = [
         emoji: "🏹",
         hearts: "❤️❤️❤️",
         idle: '/Img/Archer Idle.gif',
+        takeHit: '',
+        attack1: '',
+        specialAttack: '',
         width: '40',
         bgImg: "/Img/Archer bg.avif"
 
@@ -62,6 +71,9 @@ const initialState: character[] = [
         emoji: "📖",
         hearts: "❤️❤️",
         idle: '/Img/Mage Idle.gif',
+        takeHit: '',
+        attack1: '',
+        specialAttack: '',
         width: '40',
         bgImg: "/Img/Mage bg.avif"
     },
@@ -78,6 +90,9 @@ const initialState: character[] = [
         emoji: "🔪",
         hearts: "❤️❤️❤️❤️",
         idle: '/Img/Rogue Idle.gif',
+        takeHit: '',
+        attack1: '',
+        specialAttack: '',
         width: '40',
         bgImg: "/Img/Rogue bg.avif"
     }

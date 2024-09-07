@@ -58,13 +58,17 @@ export default function PracticePage() {
 
             {/* Content */}
             <div className="p-4" style={contentStyles}>
-                <div className="w-1/5 p-4 flex flex-col">
+                <div className="p-4 flex flex-col">
                     <div className="text-xl font-bold flex items-center">
                         <div className="opacity-80">{characters[current].name}</div>
                         <div>{characters[current].emoji}</div>
                         <div>{characters[current].hearts}</div>
                     </div>
                     <img src={characters[current].idle} alt="" className={`w-${characters[current].width} my-4`} />
+                    <img src={characters[current].takeHit} alt="" className={`w-56 my-4`} />
+                    <img src={characters[current].attack1} alt="" className={`w-80 my-4`} />
+                    <img src={characters[current].specialAttack} alt="" className={`w-[28em] my-4`} />
+
                 </div>
 
                 <div className="text-2xl w-1/2 m-auto flex flex-col justify-center items-center">

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { useAppSelector } from '../app/hooks';
 
-const defaultPara = "Few can name an unlit judo that isn't a rascal security. A fireplace sees a german as a doddered respect. The highbrow zinc reveals itself as a dusky club to those who look. The zeitgeist contends that the menseful burma reveals itself as a jumpy scarecrow to those who look. A swiss is a barebacked seat. As far as we can estimate, the reaction of a cuban becomes a highbrow increase.";
+const defaultPara = "...please wait";
 
 interface ParagraphProps {
     userInput: string | null;
