@@ -9,7 +9,12 @@ export default function PracticePage() {
 
     const [input, setInput] = useState<string>("");
     const [restart, setRestart] = useState<boolean>(false);
-    const [typingSpeedData, setTypingSpeedData] = useState<any>({ speed: null, accuracy: null });
+    const [typingSpeedData, setTypingSpeedData] = useState<{ speed: string | null; accuracy: string | null }>({ speed: null, accuracy: null });
+    const [charState, setCharState] = useState<number>(1);
+    //1: idle
+    //2: takeHit
+    //3: attack1
+    //4: specialAttack
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInput(() => event.target.value);
@@ -22,10 +27,14 @@ export default function PracticePage() {
 
 
 
-    function updateSpeed(wpm: any, accuracy: any) {
+    function updateSpeed(wpm: string | null, accuracy: string | null) {
         setTypingSpeedData(() => {
             return { speed: wpm, accuracy: accuracy }
         })
+    }
+
+    function updateCharState(num: number) {
+        setCharState(num);
     }
 
     const PracticePageStyles: React.CSSProperties = {
@@ -64,16 +73,24 @@ export default function PracticePage() {
                         <div>{characters[current].emoji}</div>
                         <div>{characters[current].hearts}</div>
                     </div>
-                    <img src={characters[current].idle} alt="" className={`w-${characters[current].width} my-4`} />
-                    <img src={characters[current].takeHit} alt="" className={`w-56 my-4`} />
-                    <img src={characters[current].attack1} alt="" className={`w-80 my-4`} />
-                    <img src={characters[current].specialAttack} alt="" className={`w-[28em] my-4`} />
+
+                    <div className="h-64 flex items-end ">
+                        {
+                            {
+                                1: <img src={characters[current].idle} alt="" className={`w-${characters[current].width} my-4`} />,
+                                2: <img src={characters[current].takeHit} alt="" className={`w-56 my-4`} />,
+                                3: <img src={characters[current].attack1} alt="" className={`w-80 my-4`} />,
+                                4: <img src={characters[current].specialAttack} alt="" className={`w-[28em] my-4`} />,
+                            }[charState]
+                        }
+                    </div>
+
 
                 </div>
 
                 <div className="text-2xl w-1/2 m-auto flex flex-col justify-center items-center">
                     <div className="">
-                        <Paragraph userInput={input} restart={restart} updateSpeed={updateSpeed} />
+                        <Paragraph userInput={input} restart={restart} updateSpeed={updateSpeed} updateCharState={updateCharState} />
                     </div>
 
                     <input

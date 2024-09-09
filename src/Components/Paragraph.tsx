@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useReducer } from 'react';
 import { useAppSelector } from '../app/hooks';
 
 const defaultPara = "...please wait";
@@ -7,21 +7,29 @@ const defaultPara = "...please wait";
 interface ParagraphProps {
     userInput: string | null;
     restart: boolean;
-    updateSpeed: any;
+    updateSpeed: (wpm: string | null, accuracy: string | null) => void;
+    updateCharState: (num: number) => void;
 }
 
-export default function Paragraph({ userInput, restart, updateSpeed }: ParagraphProps) {
+
+export default function Paragraph({ userInput, restart, updateSpeed, updateCharState }: ParagraphProps) {
     const current = useAppSelector((state) => state.current);
 
     const [paragraph, setParagraph] = useState(defaultPara);
     const [charStatus, setCharStatus] = useState<number[]>([]);
     const [errors, setErrors] = useState<number>(0);
     const [isRunning, setIsRunning] = useState<boolean>(false);
+    const [successfulHits, SetSuccessfulHits] = useState<number>(0);
+
+
 
 
     const [count, setCount] = useState<number>(0);
 
+
     const intervalID = useRef<any>()
+
+
 
 
 
@@ -38,23 +46,50 @@ export default function Paragraph({ userInput, restart, updateSpeed }: Paragraph
 
     useEffect(() => {
         if (userInput) {
+
+
             setCharStatus(prevStatus => {
                 return prevStatus.map((status, index) => {
 
+                    if (status == 0 && userInput.charAt(index) === paragraph.charAt(index)) {
+                        SetSuccessfulHits(successfulHits + 1);
+                        if (successfulHits > 20) {
+                            updateCharState(4);
+                        }
+                        else {
+                            updateCharState(3);
+                        }
+                    }
+
                     if (status === 0 && userInput.charAt(index) && userInput.charAt(index) !== paragraph.charAt(index)) {
                         setErrors(errors + 1);
+                        updateCharState(2);  //take hit 
+                        SetSuccessfulHits(0);
                         return 1; // Set red bg state (1 = mistake made)
+
+
                     }
                     else if (status === 1 && userInput.charAt(index) === paragraph.charAt(index)) {
                         setErrors(errors - 1);
+                        updateCharState(3); //normal attack
+
                         return 0;
                     }
+
                     if (index === paragraph.length - 1 && userInput.charAt(index) === paragraph.charAt(paragraph.length - 1)) {
+
                         gameOver();
+
                     }
                     return status;
+
                 });
             });
+        }
+
+
+        else {
+            updateCharState(1);
         }
     }, [userInput, paragraph]);
 
@@ -84,6 +119,8 @@ export default function Paragraph({ userInput, restart, updateSpeed }: Paragraph
         clearInterval(intervalID.current);
         setCount(0);
         setIsRunning(false);
+        updateSpeed(null, null);
+
 
     }
 
