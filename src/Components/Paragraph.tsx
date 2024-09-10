@@ -130,7 +130,7 @@ export default function Paragraph({ userInput, restart, updateSpeed, updateCharS
         let wpm = ((charStatus.length / 5) / timeTaken).toFixed(0);
         let accuracy = (((charStatus.length - errors) / charStatus.length) * 100).toFixed(0);
         updateSpeed(wpm, accuracy);
-        console.log(errors);
+        updateCharState(1);
 
         // alert(`Game over! Errors: ${errors} with WPM: ${typingSpeed}`);
     };

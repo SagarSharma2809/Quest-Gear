@@ -77,12 +77,13 @@ export default function PracticePage() {
                     <div className="h-64 flex items-end ">
                         {
                             {
-                                1: <img src={characters[current].idle} alt="" className={`w-${characters[current].width} my-4`} />,
-                                2: <img src={characters[current].takeHit} alt="" className={`w-56 my-4`} />,
-                                3: <img src={characters[current].attack1} alt="" className={`w-80 my-4`} />,
-                                4: <img src={characters[current].specialAttack} alt="" className={`w-[28em] my-4`} />,
+                                1: <img src={characters[current].idle} alt="" className={`${characters[current].widthIdle} my-4`} />,
+                                2: <img src={characters[current].takeHit} alt="" className={`${characters[current].widthTakeHit} my-4`} />,
+                                3: <img src={characters[current].attack1} alt="" className={`${characters[current].widthAttack1} my-4`} />,
+                                4: <img src={characters[current].specialAttack} alt="" className={`${characters[current].widthSpecialAttack} my-4`} />,
                             }[charState]
                         }
+
                     </div>
 
 

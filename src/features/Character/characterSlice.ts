@@ -13,7 +13,10 @@ interface character {
     takeHit: string;
     attack1: string;
     specialAttack: string;
-    width: string;
+    widthIdle: string;
+    widthTakeHit: string;
+    widthAttack1: string;
+    widthSpecialAttack: string;
     bgImg: string;
 }
 
@@ -35,7 +38,10 @@ const initialState: character[] = [
         takeHit: '/Img/Knight take hit.gif',
         attack1: '/Img/Knight attack 1.gif',
         specialAttack: '/Img/Knight special attack.gif',
-        width: '40',
+        widthIdle: 'w-40',
+        widthTakeHit: 'w-56',
+        widthAttack1: 'w-80',
+        widthSpecialAttack: 'w-[28em]',
         bgImg: "/Img/Knight bg.avif",
     },
     {
@@ -51,10 +57,13 @@ const initialState: character[] = [
         emoji: "🏹",
         hearts: "❤️❤️❤️",
         idle: '/Img/Archer Idle.gif',
-        takeHit: '',
-        attack1: '',
-        specialAttack: '',
-        width: '40',
+        takeHit: '/Img/Archer take hit.gif',
+        attack1: '/Img/Archer Attack 1.gif',
+        specialAttack: '/Img/Archer Special Attack.gif',
+        widthIdle: 'w-44',
+        widthTakeHit: 'w-72',
+        widthAttack1: 'w-72',
+        widthSpecialAttack: 'w-[50em]',
         bgImg: "/Img/Archer bg.avif"
 
     },
@@ -71,10 +80,13 @@ const initialState: character[] = [
         emoji: "📖",
         hearts: "❤️❤️",
         idle: '/Img/Mage Idle.gif',
-        takeHit: '',
-        attack1: '',
-        specialAttack: '',
-        width: '40',
+        takeHit: '/Img/Mage take hit.gif',
+        attack1: '/Img/Mage attack 1.gif',
+        specialAttack: '/Img/Mage Special Attack.gif',
+        widthIdle: 'w-40',
+        widthTakeHit: 'w-56',
+        widthAttack1: 'w-[28em]',
+        widthSpecialAttack: 'w-[28em]',
         bgImg: "/Img/Mage bg.avif"
     },
     {
@@ -93,7 +105,10 @@ const initialState: character[] = [
         takeHit: '',
         attack1: '',
         specialAttack: '',
-        width: '40',
+        widthIdle: '40',
+        widthTakeHit: '56',
+        widthAttack1: '80',
+        widthSpecialAttack: '28em',
         bgImg: "/Img/Rogue bg.avif"
     }
 ];
