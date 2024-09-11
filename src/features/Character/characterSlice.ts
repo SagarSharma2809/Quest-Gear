@@ -38,10 +38,10 @@ const initialState: character[] = [
         takeHit: '/Img/Knight take hit.gif',
         attack1: '/Img/Knight attack 1.gif',
         specialAttack: '/Img/Knight special attack.gif',
-        widthIdle: 'w-40',
-        widthTakeHit: 'w-56',
-        widthAttack1: 'w-80',
-        widthSpecialAttack: 'w-[28em]',
+        widthIdle: 'w-52',
+        widthTakeHit: 'w-64',
+        widthAttack1: 'w-96',
+        widthSpecialAttack: 'w-[34em]',
         bgImg: "/Img/Knight bg.avif",
     },
     {
@@ -84,9 +84,9 @@ const initialState: character[] = [
         attack1: '/Img/Mage attack 1.gif',
         specialAttack: '/Img/Mage Special Attack.gif',
         widthIdle: 'w-40',
-        widthTakeHit: 'w-56',
-        widthAttack1: 'w-[28em]',
-        widthSpecialAttack: 'w-[28em]',
+        widthTakeHit: 'w-72',
+        widthAttack1: 'w-[38em]',
+        widthSpecialAttack: 'w-[46em]',
         bgImg: "/Img/Mage bg.avif"
     },
     {
@@ -102,13 +102,13 @@ const initialState: character[] = [
         emoji: "🔪",
         hearts: "❤️❤️❤️❤️",
         idle: '/Img/Rogue Idle.gif',
-        takeHit: '',
-        attack1: '',
-        specialAttack: '',
-        widthIdle: '40',
-        widthTakeHit: '56',
-        widthAttack1: '80',
-        widthSpecialAttack: '28em',
+        takeHit: '/Img/Rogue take hit.gif',
+        attack1: '/Img/Rogue attack 1.gif',
+        specialAttack: '/Img/Rogue Special Attack.gif',
+        widthIdle: 'w-40',
+        widthTakeHit: 'w-60',
+        widthAttack1: 'w-80',
+        widthSpecialAttack: 'w-[48em]',
         bgImg: "/Img/Rogue bg.avif"
     }
 ];
