@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import axios from "axios";  // Import axios
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
@@ -20,9 +21,16 @@ app.get("/", (req, res) => {
     res.sendFile(join(__dirname, "dist", "index.html"));
 });
 
-// app.post("/Signup", (req, res)=>{
-
-// })
+// Proxy endpoint to fetch random paragraph
+app.get("/api/proxy", async (req, res) => {
+    try {
+        const response = await axios.get("http://metaphorpsum.com/paragraphs/1/6");
+        res.json(response.data);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("Error fetching data");
+    }
+});
 
 // Start the server
 app.listen(port, () => {
