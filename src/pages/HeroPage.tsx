@@ -80,7 +80,7 @@ export default function HeroPage() {
 
             <div className="py-4" style={contentStyles}>
                 <div className="m-10 text-center">
-                    <Heading text="Choose your Character, hi" />
+                    <Heading text="Choose your Character" />
                 </div>
 
 
