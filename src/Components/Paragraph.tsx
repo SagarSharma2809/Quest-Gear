@@ -35,7 +35,7 @@ export default function Paragraph({ userInput, restart, updateSpeed, updateCharS
 
     useEffect(() => {
         async function getPara() {
-            const response = await axios.get("/api/proxy");
+            const response = await axios.get("http://metaphorpsum.com/paragraphs/1/6");
             setParagraph(response.data);
             setCharStatus(new Array(response.data.length).fill(0));
             reset();
