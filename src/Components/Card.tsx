@@ -8,7 +8,11 @@ interface CardProps {
         emoji: string;
         hearts: string;
         idle: string;
-        width: string;
+        widthIdle: string;
+        widthTakeHit: string;
+        widthAttack1: string;
+        widthSpecialAttack: string;
+
     }
 }
 
