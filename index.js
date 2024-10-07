@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import axios from "axios";  // Import axios
+import axios from "axios";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
@@ -21,6 +21,12 @@ app.get("/", (req, res) => {
     res.sendFile(join(__dirname, "dist", "index.html"));
 });
 
+
+app.post("/submit", (req, res) => {
+    console.log(req.body);
+    res.redirect("/");
+})
+
 // Proxy endpoint to fetch random paragraph
 app.get("/api/proxy", async (req, res) => {
     try {
@@ -31,6 +37,12 @@ app.get("/api/proxy", async (req, res) => {
         res.status(500).send("Error fetching data");
     }
 });
+
+//catch-all route for any unknown paths
+app.get("*", (req, res) => {
+    alert("new account successfully created")
+    res.sendFile(join(__dirname, "dist", "index.html"));
+})
 
 // Start the server
 app.listen(port, () => {
