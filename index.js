@@ -4,6 +4,11 @@ import axios from "axios";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
+
+let username = "";
+let password = "";
+let userEmail = "";
+
 // Properly set __dirname in ES module
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -22,9 +27,23 @@ app.get("/", (req, res) => {
 });
 
 
-app.post("/submit", (req, res) => {
+app.post("/register", (req, res) => {
     console.log(req.body);
-    res.redirect("/");
+    username = req.body.username;
+    userEmail = req.body.email;
+    password = req.body.password;
+    res.sendFile(join(__dirname, "dist", "index.html")); //client side routing takes over
+})
+
+app.post("/login", (req, res) => {
+    console.log(req.body);
+    if (username == req.body.username && password == req.body.password) {
+        res.sendStatus(201);
+    }
+    else {
+        console.log("username or password doesn't match")
+        res.sendStatus(401);
+    }
 })
 
 // Proxy endpoint to fetch random paragraph
@@ -40,7 +59,7 @@ app.get("/api/proxy", async (req, res) => {
 
 //catch-all route for any unknown paths
 app.get("*", (req, res) => {
-    alert("new account successfully created")
+
     res.sendFile(join(__dirname, "dist", "index.html"));
 })
 
