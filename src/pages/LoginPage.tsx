@@ -39,6 +39,7 @@ export default function LoginPage() {
             }
             else {
                 setError(true);
+                console.log("password or username incorrect");
             }
 
         }
