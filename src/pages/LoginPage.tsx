@@ -17,7 +17,7 @@ export default function LoginPage() {
         })
     }
 
-    let api = 'http://localhost:3000/login';
+    let api = '/login';
 
 
     const handleSubmit = async (e: any) => {

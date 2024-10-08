@@ -18,7 +18,7 @@ export default function SignUpPage() {
         })
     }
 
-    let api = 'http://localhost:3000/register';
+    let api = '/register';
 
 
     const handleSubmit = (e: any) => {
