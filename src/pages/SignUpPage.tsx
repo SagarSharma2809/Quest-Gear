@@ -59,7 +59,7 @@ export default function SignUpPage() {
             {/* submit form post to backend server */}
             <form action="" className="flex flex-col w-2/3 md:w-1/3 justify-center items-center gap-2 p-4 m-4" onSubmit={handleSubmit}>
                 <input type="text" placeholder="Create Username" className="w-full border-2 border-black" name="username" onChange={handleChange} />
-                <input type="email" placeholder="Enter Email" className="w-full border-2 border-black" name="email" onChange={handleChange} />
+                <input type="email" placeholder="Enter Email" className="w-full border-2 border-black" name="email" onChange={handleChange} autoComplete="off" />
                 <div>
                     <input type="password" placeholder="Enter password" className="w-full border-2 border-black" name="password" onChange={handleChange} />
                     <button><IoMdEye /></button> <IoMdEyeOff />
