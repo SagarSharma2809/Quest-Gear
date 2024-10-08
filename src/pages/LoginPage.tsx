@@ -37,7 +37,7 @@ export default function LoginPage() {
                 navigate("/");
                 setError(false);
             }
-            else {
+            else if (response.status == 401) {
                 setError(true);
                 console.log("password or username incorrect");
             }
@@ -45,6 +45,7 @@ export default function LoginPage() {
         }
         catch (e) {
             console.log("Error in submitting data", e);
+            setError(true);
         }
 
 
