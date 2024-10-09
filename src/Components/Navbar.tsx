@@ -58,8 +58,12 @@ const Navbar = () => {
 
                     {/* Sign up buttons */}
                     <div>
-                        <button className="text-opacity-70 hover:text-white m-1"><NavLink to={"/signUp"}> Sign Up</NavLink></button>
-                        <button className="text-opacity-70 hover:text-white m-1"><NavLink to={"/login"}>Login</NavLink></button>
+                        <button className="text-opacity-70 hover:text-white m-1"><NavLink to={"/signUp"} className={({ isActive }) =>
+                            isActive ? "text-white p-1" : "hover:text-white p-1"
+                        }> Sign Up</NavLink></button>
+                        <button className="text-opacity-70 hover:text-white m-1"><NavLink to={"/login"} className={({ isActive }) =>
+                            isActive ? "text-white p-1" : "hover:text-white p-1"
+                        } >Login</NavLink></button>
                     </div>
 
 

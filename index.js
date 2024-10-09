@@ -39,10 +39,12 @@ app.post("/login", (req, res) => {
     console.log(req.body);
     if (username == req.body.username && password == req.body.password) {
         res.sendStatus(201);
+        // res.sendFile(join(__dirname, "dist", "index.html")); //client side routing takes over
     }
     else {
         console.log("username or password doesn't match")
         res.sendStatus(401);
+        // res.sendFile(join(__dirname, "dist", "index.html")); //client side routing takes over
     }
 })
 

@@ -93,7 +93,7 @@ export default function HeroPage() {
                         </div>
 
                         <div className="m-auto">
-                            <Link to={`/practice/${characters[current].name}`}><Button text="SELECT" handleClick={selectCharacter} /></Link>
+                            <Link to={`/practice/${characters[current].name}`}><Button text="SELECT" type="button" handleClick={selectCharacter} /></Link>
                         </div>
 
                     </div>
