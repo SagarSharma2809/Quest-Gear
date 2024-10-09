@@ -74,7 +74,7 @@ export default function HeroPage() {
 
 
     return (
-        <div className="lg:h-screen" style={HomePageStyles}>
+        <div className="h-full lg:h-screen" style={HomePageStyles}>
             {/* Overlay */}
             <div style={overlayStyles}></div>
 
