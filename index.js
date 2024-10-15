@@ -18,33 +18,34 @@ const port = process.env.PORT || 3000;
 // Middleware to parse URL-encoded data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files from the 'dist' directory (including the assets folder)
-app.use(express.static(join(__dirname, "dist")));
+// Serve static files **only in production**
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(join(__dirname, "dist")));
 
-// Serve the index.html file from the dist directory
-app.get("/", (req, res) => {
-    res.sendFile(join(__dirname, "dist", "index.html"));
-});
-
+    // Serve the index.html file from the dist directory for client-side routing
+    app.get('*', (req, res) => {
+        res.sendFile(join(__dirname, "dist", "index.html"));
+    });
+}
 
 app.post("/register", (req, res) => {
     console.log(req.body);
     username = req.body.username;
     userEmail = req.body.email;
     password = req.body.password;
-    res.sendFile(join(__dirname, "dist", "index.html")); //client side routing takes over
+    res.sendStatus(201);
 })
 
 app.post("/login", (req, res) => {
     console.log(req.body);
     if (username == req.body.username && password == req.body.password) {
         res.sendStatus(201);
-        // res.sendFile(join(__dirname, "dist", "index.html")); //client side routing takes over
+
     }
     else {
         console.log("username or password doesn't match")
         res.sendStatus(401);
-        // res.sendFile(join(__dirname, "dist", "index.html")); //client side routing takes over
+
     }
 })
 
@@ -59,11 +60,11 @@ app.get("/api/proxy", async (req, res) => {
     }
 });
 
-//catch-all route for any unknown paths
-app.get("*", (req, res) => {
+// //catch-all route for any unknown paths
+// app.get("*", (req, res) => {
 
-    res.sendFile(join(__dirname, "dist", "index.html"));
-})
+//     res.sendFile(join(__dirname, "dist", "index.html"));
+// })
 
 // Start the server
 app.listen(port, () => {

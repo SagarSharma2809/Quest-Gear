@@ -35,7 +35,8 @@ const Navbar = () => {
                     {/* Logo */}
                     <div>
                         <img src="" alt="" />
-                        <div className="text-xl text-white font-bold">Quest Gear</div>
+                        <NavLink to="/"><div className="text-xl text-white font-bold">Quest Gear</div></NavLink>
+
                     </div>
 
 
@@ -56,14 +57,14 @@ const Navbar = () => {
                         })}
                     </ul>
 
-                    {/* Sign up buttons */}
+                    {/* Login */}
                     <div>
-                        <button className="text-opacity-70 hover:text-white m-1"><NavLink to={"/signUp"} className={({ isActive }) =>
-                            isActive ? "text-white p-1" : "hover:text-white p-1"
-                        }> Sign Up</NavLink></button>
-                        <button className="text-opacity-70 hover:text-white m-1"><NavLink to={"/login"} className={({ isActive }) =>
-                            isActive ? "text-white p-1" : "hover:text-white p-1"
-                        } >Login</NavLink></button>
+
+                        <button className="text-opacity-70 hover:text-white m-1">
+                            <NavLink to={"/login"} className={({ isActive }) =>
+                                isActive ? "text-white p-1" : "hover:text-white p-1"
+                            } >Login</NavLink>
+                        </button>
                     </div>
 
 

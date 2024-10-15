@@ -1,27 +1,39 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'
 
 import Navbar from './Components/Navbar'
 import HeroPage from './pages/HeroPage'
 import PracticePage from './pages/PracticePage'
-import SignUp from './pages/SignUpPage'
-import LoginPage from './pages/LoginPage'
-
+import AuthPage from './pages/AuthPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 import './App.css'
-import SignUpPage from './pages/SignUpPage'
+
+
 
 function App() {
   return (
+    <Router>
+      <Main />
+    </Router>
+  )
+}
+
+function Main() {
+
+  const location = useLocation();
+  return (
     <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<HeroPage />}></Route>
-          <Route path='/Practice/:characterName' element={<PracticePage />}></Route>
-          <Route path='/signUp' element={<SignUpPage />}></Route>
-          <Route path='/login' element={<LoginPage />}></Route>
-        </Routes>
-      </Router>
+
+
+      {location.pathname !== '/signup' && location.pathname !== '/login' && <Navbar />}
+      <Routes>
+        <Route path='/signup' element={<AuthPage />} />
+        <Route path='/login' element={<AuthPage />} />
+        <Route path='/' element={<HeroPage />} />
+        <Route path='/Practice/:characterName' element={<PracticePage />} />
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+
     </>
   )
 }

@@ -3,7 +3,7 @@
 interface buttonProps {
     text: string;
     type: "button" | "submit" | "reset";
-    handleClick: (() => void) | null;
+    handleClick?: ((e: any) => void) | null;
 }
 
 export const Button = ({ text, type, handleClick }: buttonProps) => {
