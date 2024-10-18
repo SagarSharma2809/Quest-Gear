@@ -59,8 +59,6 @@ export default function Login() {
 
         e.preventDefault();
 
-        setInputData({ "username": "", "email": "", "password": "", "confirm": "" })
-
         if (!isLogin && inputData.password != inputData.confirm) {
             setIsConfirmPasswordMatched(false);
             return;
@@ -94,6 +92,7 @@ export default function Login() {
                 console.log("password or username incorrect");
             }
 
+            setInputData({ "username": "", "email": "", "password": "", "confirm": "" })
         }
 
         catch (e) {
