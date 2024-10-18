@@ -22,7 +22,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(join(__dirname, "dist")));
 
+
+    // Proxy endpoint to fetch random paragraph
+    app.get("/api/proxy", async (req, res) => {
+        try {
+            const response = await axios.get("http://metaphorpsum.com/paragraphs/1/6");
+            res.json(response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            res.status(500).send("Error fetching data");
+        }
+    });
+
     // Serve the index.html file from the dist directory for client-side routing
+
     app.get('*', (req, res) => {
         res.sendFile(join(__dirname, "dist", "index.html"));
     });
