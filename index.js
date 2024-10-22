@@ -49,7 +49,7 @@ app.post("/register", (req, res) => {
     res.sendStatus(201);
 })
 
-app.post("/login", (req, res) => {
+app.post("/api/login", (req, res) => {
     console.log(req.body);
     if (username == req.body.username && password == req.body.password) {
         res.sendStatus(201);
@@ -73,11 +73,11 @@ app.get("/api/proxy", async (req, res) => {
     }
 });
 
-// //catch-all route for any unknown paths
-// app.get("*", (req, res) => {
+//catch-all route for any unknown paths
+app.get("*", (req, res) => {
 
-//     res.sendFile(join(__dirname, "dist", "index.html"));
-// })
+    res.sendFile(join(__dirname, "dist", "index.html"));
+})
 
 // Start the server
 app.listen(port, () => {

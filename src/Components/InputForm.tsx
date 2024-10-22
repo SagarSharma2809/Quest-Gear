@@ -20,7 +20,7 @@ export default function InputForm({ inputData, onChange, onSubmit, type }: Input
 
     return (
         <>
-            <form action="" className="flex flex-col w-2/3 md:w-1/3 justify-center items-center gap-2 p-4 m-4" onSubmit={onSubmit}>
+            <form action="" className="flex flex-col md:w-2/3 justify-center items-center gap-2 p-4 m-4" onSubmit={onSubmit}>
                 <input type="text" placeholder="Enter a Username" className="w-full border-2 border-black" name="username" value={inputData.username} onChange={onChange} required />
 
                 {type == "signup" &&

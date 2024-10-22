@@ -1,32 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 import InputForm from "../Components/InputForm";
-import { Heading } from "../Components/Heading";
+import Heading2 from "../Components/Heading2";
 
 const LoginPageStyles: React.CSSProperties = {
-    backgroundImage: `url("/Img/signUpBg.jpg")`,
+    backgroundImage: `url("/Img/loginBg.jpg")`,
     backgroundSize: "cover",
     backgroundPosition: 'center 20%',
     position: 'relative',
     zIndex: 1,
 };
 
-const overlayStyles: React.CSSProperties = {
-    position: 'absolute' as 'absolute', // Explicitly cast to 'absolute'
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Black overlay with 70% opacity
-    zIndex: 2,
-};
 
 const contentStyles: React.CSSProperties = {
     position: 'relative' as 'relative', // Ensures content is above overlay
     zIndex: 3,
+
 };
 
 export default function Login() {
@@ -43,8 +35,15 @@ export default function Login() {
         setIsLogin(!isLogin);
     }
 
+    useEffect(() => {
+
+        setIsConfirmPasswordMatched(true);
+        setError(false);
+        setInputData({ "username": "", "email": "", "password": "", "confirm": "" })
+    }, [isLogin])
+
     const handleChange = (e: any) => {
-        console.log(e.target.value);
+
         const value = e.target.value;
         const name = e.target.name;
 
@@ -53,7 +52,7 @@ export default function Login() {
         })
     }
 
-    let api = isLogin ? '/login' : '/register';
+    let api = isLogin ? '/api/login' : '/register';
 
     const handleSubmit = async (e: any) => {
 
@@ -63,12 +62,13 @@ export default function Login() {
             setIsConfirmPasswordMatched(false);
             return;
         }
-
-        const { confirm, email, ...dataToSend } = inputData;
+        const requestData = isLogin
+            ? (({ confirm, email, ...rest }) => rest)(inputData)  // Extract login data
+            : (({ confirm, ...rest }) => rest)(inputData);        // Extract signup data
 
         try {
 
-            const response = await axios.post(api, dataToSend, {
+            const response = await axios.post(api, requestData, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
@@ -106,7 +106,6 @@ export default function Login() {
         <>
 
             <div className="h-screen" style={LoginPageStyles}>
-                <div style={overlayStyles}></div>
 
 
                 <div className=" h-full" style={contentStyles}>
@@ -117,42 +116,48 @@ export default function Login() {
                     </nav>
 
 
-                    <div className="container p-20 ">
-
-                        <Heading text={isLogin ? "Log in your Account" : "Create new Account"} />
-
-                        {/* submit form post to backend server */}
+                    <div className="container h-2/3 flex justify-center lg:justify-end items-center">
 
 
-                        <InputForm inputData={inputData} onChange={handleChange} onSubmit={handleSubmit} type={isLogin ? "login" : "signup"} />
+                        <div className="p-8 lg:mr-60 flex flex-col justify-center items-center lg:w-1/3 bg-white">
+
+                            {/* <Heading text={isLogin ? "Log in your Account" : "Create new Account"} /> */}
+                            <Heading2 text={isLogin ? "Log in your Account" : "Create new Account"} />
+
+                            {/* submit form post to backend server */}
 
 
-                        <div className="text-white">
-                            {isLogin ? (
-                                <>
-                                    Don’t have an account?{' '}
-                                    <NavLink to="/signup" onClick={changeMode} className="text-blue-500">
-                                        Sign up
-                                    </NavLink>
-                                </>
-                            ) : (
-                                <>
-                                    Already have an account?{' '}
-                                    <NavLink to="/login" onClick={changeMode} className="text-blue-500">
-                                        Log In
-                                    </NavLink>
-                                </>
-                            )}
+                            <InputForm inputData={inputData} onChange={handleChange} onSubmit={handleSubmit} type={isLogin ? "login" : "signup"} />
+
+
+                            <div className="text-blue-950">
+                                {isLogin ? (
+                                    <>
+                                        Don’t have an account?{' '}
+                                        <NavLink to="/signup" onClick={changeMode} className="text-blue-500">
+                                            Sign up
+                                        </NavLink>
+                                    </>
+                                ) : (
+                                    <>
+                                        Already have an account?{' '}
+                                        <NavLink to="/login" onClick={changeMode} className="text-blue-500">
+                                            Log In
+                                        </NavLink>
+                                    </>
+                                )}
+                            </div>
+
+
+
+                            {!isLogin && !isConfirmPasswordMatched && <div className="text-red-400">Please make sure your passwords match.</div>}
+
+                            {isLogin && error &&
+
+                                <div className="text-red-400">Username or Password is incorrect</div>
+                            }
                         </div>
 
-
-
-                        {!isLogin && !isConfirmPasswordMatched && <div className="text-red-400">Please make sure your passwords match.</div>}
-
-                        {isLogin && error &&
-
-                            <div className="text-red-400">Username or Password is incorrect</div>
-                        }
                     </div>
 
 
