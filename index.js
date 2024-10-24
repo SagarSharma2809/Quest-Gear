@@ -1,19 +1,44 @@
 import express from "express";
 import bodyParser from "body-parser";
+import pg from 'pg';
 import axios from "axios";
+import dotenv from 'dotenv';
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 
-let username = "";
-let password = "";
-let userEmail = "";
+dotenv.config();
+
+const dbPassword = process.env.DB_PASSWORD;
 
 // Properly set __dirname in ES module
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+//connecting to DB 
+const db = new pg.Client({
+    user: "postgres",
+    host: "localhost",
+    database: "QuestGear",
+    password: dbPassword,
+    port: 5432
+})
+
+db.connect();
+
+//dummy userData
+let userData = [{ "id": 2, "username": "Joy", "email": "helloHi@gmail.com", "pass": "ballbatball" }]
+
+// db.query("SELECT * FROM users", (err, res) => {
+//     if (err) {
+//         console.error("Error executing query", err.stack);
+//     }
+//     else {
+//         userData = res.rows;
+//     }
+// })
 
 // Middleware to parse URL-encoded data
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,25 +49,71 @@ if (process.env.NODE_ENV === 'production') {
 
 }
 
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
     console.log(req.body);
-    username = req.body.username;
-    userEmail = req.body.email;
-    password = req.body.password;
-    res.sendStatus(201);
+    const { username, email, pass } = req.body;
+    try {
+
+        const checkResults = await db.query("SELECT * FROM users WHERE email = $1;", [email]);
+
+        if (checkResults.rows.length > 0) {
+            res.status(409).send("Email already exists. Try loggin in. ");
+        }
+        else {
+            const query = `INSERT INTO users (username, email, pass) VALUES($1, $2, $3);`
+            const values = [username, email, pass];
+
+            db.query(query, values, (err, result) => {
+                if (err) {
+                    console.error("Error executing query", err.stack);
+                    res.status(500).send("Error creating account");
+                }
+                else {
+                    console.log("User inserted successfully");
+                    res.status(201).send("Account created successfully");
+                }
+            })
+        }
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+
 })
 
-app.post("/api/login", (req, res) => {
-    console.log(req.body);
-    if (username == req.body.username && password == req.body.password) {
-        res.sendStatus(201);
+app.post("/api/login", async (req, res) => {
+    const { username, pass } = req.body;
+    try {
+        const checkResults = await db.query("SELECT * FROM users WHERE username = $1;", [username]);
+
+        if (checkResults.rows.length > 0) {
+            //username exists so check password
+            const user = checkResults.rows[0];
+
+            const username = user.username;
+            const storedPassword = user.pass;
+            console.log(storedPassword)
+            if (pass === storedPassword) {
+
+                res.status(201).json({ "username": username })
+
+            }
+            else {
+                console.log("username or password is incorrect");
+                res.sendStatus(401);
+            }
+        }
+        else {
+            console.log("username or password is incorrect");
+            res.sendStatus(401);
+        }
 
     }
-    else {
-        console.log("username or password doesn't match")
-        res.sendStatus(401);
-
+    catch (err) {
+        console.log(err);
     }
+
 })
 
 // Proxy endpoint to fetch random paragraph

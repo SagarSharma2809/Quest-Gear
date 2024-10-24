@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from '../app/hooks'
+import { userDataUpdate } from "../features/Users/userSlice";
 import axios from 'axios';
 
 import InputForm from "../Components/InputForm";
@@ -23,11 +25,14 @@ const contentStyles: React.CSSProperties = {
 
 export default function Login() {
 
-    const [isLogin, setIsLogin] = useState(true);  //Login mode by default
+    const [isLogin, setIsLogin] = useState<boolean>(true);  //Login mode by default
 
-    const [isConfirmPasswordMatched, setIsConfirmPasswordMatched] = useState(true);
-    const [error, setError] = useState(false);
-    const [inputData, setInputData] = useState({ "username": "", "email": "", "password": "", "confirm": "" })
+    const [isConfirmPasswordMatched, setIsConfirmPasswordMatched] = useState<boolean>(true);
+    const [error, setError] = useState<boolean>(false);
+    const [inputData, setInputData] = useState({ "username": "", "email": "", "pass": "", "confirm": "" })
+
+
+    const dispatch = useAppDispatch();
 
     const navigate = useNavigate();
 
@@ -39,7 +44,7 @@ export default function Login() {
 
         setIsConfirmPasswordMatched(true);
         setError(false);
-        setInputData({ "username": "", "email": "", "password": "", "confirm": "" })
+        setInputData({ "username": "", "email": "", "pass": "", "confirm": "" })
     }, [isLogin])
 
     const handleChange = (e: any) => {
@@ -58,7 +63,7 @@ export default function Login() {
 
         e.preventDefault();
 
-        if (!isLogin && inputData.password != inputData.confirm) {
+        if (!isLogin && inputData.pass != inputData.confirm) {
             setIsConfirmPasswordMatched(false);
             return;
         }
@@ -76,6 +81,10 @@ export default function Login() {
 
             if (response.status == 201) {
                 if (isLogin) {
+                    const currentUsername = response.data.username;
+                    const currentEmail = response.data.email;
+
+                    dispatch(userDataUpdate({ "username": currentUsername, "email": currentEmail }))
                     changeMode();
                     navigate("/");
                     setError(false);
@@ -86,13 +95,17 @@ export default function Login() {
                 }
 
             }
+            else if (!isLogin && response.status == 409) {
+                setError(true);
+                console.log("Email already exists. Try loggin in. ");
+            }
             else if (isLogin && response.status == 401) {
 
                 setError(true);
                 console.log("password or username incorrect");
             }
 
-            setInputData({ "username": "", "email": "", "password": "", "confirm": "" })
+            setInputData({ "username": "", "email": "", "pass": "", "confirm": "" })
         }
 
         catch (e) {
@@ -152,10 +165,11 @@ export default function Login() {
 
                             {!isLogin && !isConfirmPasswordMatched && <div className="text-red-400">Please make sure your passwords match.</div>}
 
-                            {isLogin && error &&
+                            {error &&
 
-                                <div className="text-red-400">Username or Password is incorrect</div>
+                                <div className="text-red-400">{isLogin ? "Username or Password is incorrect" : "Email already exists. Try loggin in. "}</div>
                             }
+
                         </div>
 
                     </div>

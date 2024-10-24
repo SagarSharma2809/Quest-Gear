@@ -4,7 +4,7 @@ import { Button } from "../Components/Button";
 interface inputDataProps {
     username: string;
     email: string
-    password: string;
+    pass: string;
     confirm: string
 }
 
@@ -27,7 +27,7 @@ export default function InputForm({ inputData, onChange, onSubmit, type }: Input
                     <input type="email" placeholder="Enter Email" className="w-full border-2 border-black" name="email" value={inputData.email} onChange={onChange} autoComplete="off" required />
                 }
 
-                <PasswordInput name="password" placeholder="Enter your password..." value={inputData.password} onChange={onChange} />
+                <PasswordInput name="pass" placeholder="Enter your password..." value={inputData.pass} onChange={onChange} />
 
                 {type == "signup" &&
                     <PasswordInput name="confirm" placeholder="Confirm password" value={inputData.confirm} onChange={onChange} />

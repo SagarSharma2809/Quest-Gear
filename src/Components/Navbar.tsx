@@ -6,6 +6,8 @@ const Navbar = () => {
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const currentUsername = useAppSelector(state => state.user.username)
+
     const navItems = ['Home', 'Practice', 'Play Online', 'Contact Us'];
 
     const navClasses = isOpen ? "flex flex-col" : "hidden";
@@ -61,9 +63,9 @@ const Navbar = () => {
                     <div>
 
                         <button className="text-opacity-70 hover:text-white m-1">
-                            <NavLink to={"/login"} className={({ isActive }) =>
+                            <NavLink to={currentUsername ? "/profile" : "/login"} className={({ isActive }) =>
                                 isActive ? "text-white p-1" : "hover:text-white p-1"
-                            } >Login</NavLink>
+                            } >{currentUsername ? currentUsername : "Login"}</NavLink>
                         </button>
                     </div>
 
