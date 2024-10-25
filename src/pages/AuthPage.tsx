@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from '../app/hooks'
 import { userDataUpdate } from "../features/Users/userSlice";
@@ -23,9 +23,14 @@ const contentStyles: React.CSSProperties = {
 
 };
 
-export default function Login() {
 
-    const [isLogin, setIsLogin] = useState<boolean>(true);  //Login mode by default
+
+
+export default function AuthPage() {
+
+    const location = useLocation();
+
+    const [isLogin, setIsLogin] = useState<boolean>(location.pathname === "/login");
 
     const [isConfirmPasswordMatched, setIsConfirmPasswordMatched] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
