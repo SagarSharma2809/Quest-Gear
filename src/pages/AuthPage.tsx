@@ -86,8 +86,9 @@ export default function AuthPage() {
 
             if (response.status == 201) {
                 if (isLogin) {
-                    const currentUsername = response.data.username;
-                    const currentEmail = response.data.email;
+                    console.log(response.data);
+                    const currentUsername = response.data.data.user.username;
+                    const currentEmail = response.data.data.user.email;
 
                     dispatch(userDataUpdate({ "username": currentUsername, "email": currentEmail }))
                     changeMode();
