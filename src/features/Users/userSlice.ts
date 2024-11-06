@@ -1,13 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import Cookies from 'js-cookie'
 
 interface userDataProp {
     "username": string,
     "email": string
 }
 
+const userDataStr = Cookies.get('UserData');
+const userData = userDataStr ? JSON.parse(userDataStr) : undefined;
+
+
 const initialState: userDataProp = {
-    "username": "",
-    "email": ""
+
+    "username": userData?.username || "",
+    "email": userData?.email || ""
 }
 
 const UserSlice = createSlice({

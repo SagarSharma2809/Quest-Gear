@@ -42,6 +42,7 @@ export default function HeroPage() {
 
     const characters = useAppSelector(state => state.characters);
     const currentNumber = useAppSelector(state => state.current);
+    const username = useAppSelector(state => state.user.username);
 
     const dispatch = useAppDispatch();
 
@@ -80,7 +81,7 @@ export default function HeroPage() {
 
             <div className="py-4" style={contentStyles}>
                 <div className="m-10 text-center">
-                    <Heading text="Choose your Character" />
+                    <Heading text={`${username != "" ? `Hi ${username}` : ""}, Choose your Character`} />
                 </div>
 
 

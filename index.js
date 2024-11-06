@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import bcrypt from "bcryptjs";
 import cors from "cors";
 import jwt from "jsonwebtoken"
+import Cookies from 'js-cookie'
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import data from "autoprefixer";
@@ -41,6 +42,7 @@ let userData = [{ "id": 2, "username": "Joy", "email": "helloHi@gmail.com", "pas
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
+
 // Serve static files **only in production**
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(join(__dirname, "dist")));
@@ -49,6 +51,10 @@ if (process.env.NODE_ENV === 'production') {
 
 app.post("/register", async (req, res) => {
     console.log(req.body);
+    //retrieving the cookie
+    const token = Cookies.get('token');
+    console.log("checking for cookie...");
+    console.log(token);
     const { username, email, pass } = req.body;
     try {
         const checkResults = await db.query("SELECT * FROM users WHERE email = $1;", [email]);
@@ -99,15 +105,12 @@ app.post("/api/login", async (req, res) => {
             const user = checkResults.rows[0];
             const storedPassword = user.pass;
 
-
             //verifying the password
             bcrypt.compare(pass, storedPassword, (err, result) => {
-
                 if (err) {
                     console.log("Error comparing passwords:", err);
                 }
                 else {
-
                     if (result) {
                         //generate jwt token
                         const token = jwt.sign(
@@ -115,8 +118,6 @@ app.post("/api/login", async (req, res) => {
                             process.env.JWT_SECRET,   //secret key to sign the token
                             { expiresIn: process.env.JWT_EXPIRES_IN }
                         )
-
-
                         res.status(201).json({
                             status: 'success',
                             token,
@@ -124,8 +125,6 @@ app.post("/api/login", async (req, res) => {
                                 user
                             },
                         })
-
-
 
                     }
                     else {
@@ -160,7 +159,6 @@ app.get("/api/proxy", async (req, res) => {
 
 //catch-all route for any unknown paths
 app.get("*", (req, res) => {
-
     res.sendFile(join(__dirname, "dist", "index.html"));
 })
 
