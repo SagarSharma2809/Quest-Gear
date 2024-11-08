@@ -4,8 +4,8 @@ import Paragraph from "../Components/Paragraph";
 import { VscDebugRestart } from "react-icons/vsc";
 
 export default function PracticePage() {
-    const characters = useAppSelector(state => state.characters);
-    const current = useAppSelector(state => state.current);
+    const characters = useAppSelector(state => state.character);
+    const current = useAppSelector(state => state.currentCharacter);
 
     const [input, setInput] = useState<string>("");
     const [restart, setRestart] = useState<boolean>(false);

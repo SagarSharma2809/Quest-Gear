@@ -1,15 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit'
-import characterReducer from '../features/Character/characterSlice'
-import CurrentCharacterReducer from '../features/Character/CurrentCharacterSlice'
-import UserSliceReducer from '../features/Users/userSlice'
+import rootReducer from './reducers/index'
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+
+
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['user']
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-    reducer: {
-        characters: characterReducer,
-        current: CurrentCharacterReducer,
-        user: UserSliceReducer
-    }
-})
+    reducer: persistedReducer,
+    devTools: process.env.NODE_ENV !== 'production',
+});
+
 
 export type AppStore = typeof store
 export type AppDispatch = typeof store.dispatch

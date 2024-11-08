@@ -1,13 +1,10 @@
-
-
-
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { useAppDispatch } from '../app/hooks'
 import { currentUpdated } from "../features/Character/CurrentCharacterSlice";
-
-import { useState } from "react";
-
+import { userDataUpdate } from "../features/Users/userSlice";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Slider from "../Components/Slider";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
@@ -37,16 +34,32 @@ const contentStyles: React.CSSProperties = {
     zIndex: 3,
 };
 
+
+
 export default function HeroPage() {
 
-
-    const characters = useAppSelector(state => state.characters);
-    const currentNumber = useAppSelector(state => state.current);
+    const characters = useAppSelector(state => state.character);
+    const currentNumber = useAppSelector(state => state.currentCharacter);
     const username = useAppSelector(state => state.user.username);
 
     const dispatch = useAppDispatch();
 
     const [current, setCurrent] = useState(currentNumber)
+
+    useEffect(() => {
+        //on mounting, call the /home/user endpoint to verify jwt token
+        axios.get('/home/user', { withCredentials: true })
+            .then(response => {
+                console.log(response.data);
+
+                //store the data of user in store
+                dispatch(userDataUpdate(response.data.userData))
+
+            })
+            .catch(error => {
+                console.log("user not verified");
+            });
+    }, [])
 
     const nextSlide = () => {
         if (current === characters.length - 1) {
@@ -81,7 +94,7 @@ export default function HeroPage() {
 
             <div className="py-4" style={contentStyles}>
                 <div className="m-10 text-center">
-                    <Heading text={`${username != "" ? `Hi ${username}` : ""}, Choose your Character`} />
+                    <Heading text={`${username != "" ? `Hi ${username},` : ""}Choose your Character`} />
                 </div>
 
 

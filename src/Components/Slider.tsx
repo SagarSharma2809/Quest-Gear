@@ -9,7 +9,7 @@ interface SliderProps {
 
 export default function Slider({ current }: SliderProps) {
 
-    const characters = useAppSelector(state => state.characters);
+    const characters = useAppSelector(state => state.character);
 
     return (
         <div className="overflow-hidden relative">

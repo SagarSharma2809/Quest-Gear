@@ -6,14 +6,11 @@ interface userDataProp {
     "email": string
 }
 
-const userDataStr = Cookies.get('UserData');
-const userData = userDataStr ? JSON.parse(userDataStr) : undefined;
-
 
 const initialState: userDataProp = {
 
-    "username": userData?.username || "",
-    "email": userData?.email || ""
+    "username": "",
+    "email": ""
 }
 
 const UserSlice = createSlice({

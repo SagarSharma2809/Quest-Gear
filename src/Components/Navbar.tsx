@@ -14,8 +14,8 @@ const Navbar = () => {
         setIsOpen(!isOpen);
     }
 
-    const characters = useAppSelector(state => state.characters);
-    const current = useAppSelector(state => state.current);
+    const characters = useAppSelector(state => state.character);
+    const current = useAppSelector(state => state.currentCharacter);
     const currentUsername = useAppSelector(state => state.user.username)
 
     return (

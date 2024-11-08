@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from '../app/hooks'
-import { userDataUpdate } from "../features/Users/userSlice";
 import axios from 'axios';
-import Cookies from 'js-cookie';
-
 import InputForm from "../Components/InputForm";
 import Heading2 from "../Components/Heading2";
 
@@ -36,9 +32,6 @@ export default function AuthPage() {
     const [isConfirmPasswordMatched, setIsConfirmPasswordMatched] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
     const [inputData, setInputData] = useState({ "username": "", "email": "", "pass": "", "confirm": "" })
-
-
-    const dispatch = useAppDispatch();
 
     const navigate = useNavigate();
 
@@ -88,15 +81,6 @@ export default function AuthPage() {
             if (response.status == 201) {
                 if (isLogin) {
 
-                    const currentUsername = response.data.data.user.username;
-                    const currentEmail = response.data.data.user.email;
-
-                    //store token in cookie
-                    const token = response.data.token;
-                    Cookies.set('token', token, { expires: 20, secure: true });
-                    Cookies.set('UserData', JSON.stringify(response.data.data.user), { expires: 20, secure: true });
-
-                    dispatch(userDataUpdate({ "username": currentUsername, "email": currentEmail }))
                     changeMode();
                     navigate("/");
                     setError(false);
