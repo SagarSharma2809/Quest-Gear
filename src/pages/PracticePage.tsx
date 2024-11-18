@@ -61,7 +61,7 @@ export default function PracticePage() {
     };
 
     return (
-        <div className="relative h-screen text-white" style={PracticePageStyles}>
+        <div className="relative h-full xl:h-screen text-white" style={PracticePageStyles}>
             {/* Overlay */}
             <div style={overlayStyles}></div>
 

@@ -48,17 +48,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const checkToken = (req, res, next) => {
-
     const userToken = req.cookies.token;
-
     if (userToken) {
-
         jwt.verify(userToken, process.env.JWT_SECRET, (err, authorizedData) => {
             if (err) {
                 console.log(err, 'could not connect to the protected route');
                 res.status(403).json({ message: "Invalid token" });
             } else {
                 //token verified successfully
+
                 req.authorizedData = authorizedData;
                 next();
             }
@@ -67,7 +65,7 @@ const checkToken = (req, res, next) => {
     }
     else {
         //if header is undefined, return 403    
-        res.status(403);
+        res.sendStatus(403);
     }
 }
 
@@ -98,6 +96,14 @@ app.get("/home/user", checkToken, async (req, res) => {
     }
 
 })
+
+
+app.get('/logout', (req, res) => {
+
+    res.clearCookie('token');
+    res.status(201).json({ message: "success logout" });
+})
+
 
 app.post("/register", async (req, res) => {
     console.log(req.body);
@@ -171,7 +177,7 @@ app.post("/api/login", async (req, res) => {
                             httpOnly: true,
                             secure: process.env.NODE_ENV === 'production',
                             sameSite: 'strict',
-                            maxAge: 20 * 24 * 60 * 60 * 1000   //cookie valid for 20 days
+                            maxAge: 7 * 24 * 60 * 60 * 1000   //cookie valid for 7 days
                         }).json({ message: "success" })
 
                     }

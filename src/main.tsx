@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { store } from './app/store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
+import Loading from "./Components/Loading";
 import App from './App';
 import './index.css';
 import axios from 'axios';
@@ -18,7 +19,7 @@ if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={<Loading />} persistor={persistor}>
           <App />
         </PersistGate>
       </Provider>

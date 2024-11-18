@@ -13,7 +13,7 @@ interface ParagraphProps {
 
 
 export default function Paragraph({ userInput, restart, updateSpeed, updateCharState }: ParagraphProps) {
-    const current = useAppSelector((state) => state.current);
+    const current = useAppSelector((state) => state.currentCharacter);
 
     const [paragraph, setParagraph] = useState(defaultPara);
     const [charStatus, setCharStatus] = useState<number[]>([]);
