@@ -12,10 +12,6 @@ import { fileURLToPath } from "url";
 
 dotenv.config();
 
-const dbPassword = process.env.DB_PASSWORD_SUPABASE
-const dbHost = process.env.DB_HOST_SUPABASE
-const dbUser = process.env.DB_USER_SUPABASE
-
 // Properly set __dirname in ES module
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -24,22 +20,15 @@ const port = process.env.PORT || 3000;
 
 const saltRounds = 10;
 
-//connecting to DB 
-// const db = new pg.Client({
-//     user: "postgres",
-//     host: "localhost",
-//     database: "QuestGear",
-//     password: dbPassword,
-//     port: 5432
-// })
-
+// connecting to DB 
 const db = new pg.Client({
-    user: dbUser,
-    host: dbHost,
-    database: "postgres",
-    password: dbPassword,
+    user: process.env.DB_USER_SUPABASE,
+    host: process.env.DB_HOST_SUPABASE,
+    database: 'postgres',
+    password: process.env.DB_PASSWORD_SUPABASE,
     port: 6543
 })
+
 
 db.connect();
 
