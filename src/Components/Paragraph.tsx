@@ -9,6 +9,7 @@ interface ParagraphProps {
     restart: boolean;
     updateSpeed: (wpm: string | null, accuracy: string | null) => void;
     updateCharState: (num: number) => void;
+
 }
 
 
@@ -20,25 +21,21 @@ export default function Paragraph({ userInput, restart, updateSpeed, updateCharS
     const [errors, setErrors] = useState<number>(0);
     const [isRunning, setIsRunning] = useState<boolean>(false);
     const [successfulHits, SetSuccessfulHits] = useState<number>(0);
-
-
-
-
     const [count, setCount] = useState<number>(0);
 
 
     const intervalID = useRef<any>()
 
 
-
-
-
     useEffect(() => {
         async function getPara() {
+
             const response = await axios.get('/api/proxy');
             setParagraph(response.data);
             setCharStatus(new Array(response.data.length).fill(0));
             reset();
+
+
         }
 
         getPara();

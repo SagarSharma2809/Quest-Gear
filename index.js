@@ -32,9 +32,6 @@ const db = new pg.Client({
 
 db.connect();
 
-//dummy userData
-let userData = [{ "id": 2, "username": "Joy", "email": "helloHi@gmail.com", "pass": "ballbatball" }]
-
 // Middleware to parse URL-encoded data
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -83,7 +80,7 @@ app.get("/home/user", checkToken, async (req, res) => {
             res.json({
                 message: "Successful log in",
                 userData: data
-            })
+            }).status(200).message('Successful log in')
         }
         else {
             console.log("User doesn't exist with this id");
@@ -105,7 +102,6 @@ app.get('/logout', (req, res) => {
 
 
 app.post("/register", async (req, res) => {
-    console.log(req.body);
 
     const { username, email, pass } = req.body;
     try {
@@ -121,7 +117,6 @@ app.post("/register", async (req, res) => {
                     console.log("Error hashing password:", err);
                 }
                 else {
-                    console.log("Hashed Password:", hash);
                     const query = `INSERT INTO users (username, email, pass) VALUES($1, $2, $3);`
                     const values = [username, email, hash];
                     db.query(query, values, (err, result) => {
@@ -197,6 +192,12 @@ app.post("/api/login", async (req, res) => {
         console.log(err);
     }
 
+})
+
+app.get('/ping-server', async (req, res)=>{
+    console.log('cron job activated');
+
+    res.json({message: 'success'});
 })
 
 // Proxy endpoint to fetch random paragraph
