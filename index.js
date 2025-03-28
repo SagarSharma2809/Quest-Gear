@@ -68,6 +68,7 @@ const checkToken = (req, res, next) => {
 app.get("/home/user", checkToken, async (req, res) => {
     const { UserId } = req.authorizedData;
     console.log("Connected to protected route");
+    console.log(UserId, 'user id')
     try {
         const results = await db.query("SELECT * FROM users WHERE id = $1", [UserId]);
 
