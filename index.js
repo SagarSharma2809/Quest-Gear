@@ -197,7 +197,7 @@ app.post("/api/login", async (req, res) => {
 app.get('/ping-server', async (req, res)=>{
     console.log('cron job activated');
 
-    res.json({message: 'success'});
+    res.sendStatus(200);
 })
 
 // Proxy endpoint to fetch random paragraph
