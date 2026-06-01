@@ -24,9 +24,9 @@ const saltRounds = 10;
 const db = new pg.Client({
     user: process.env.DB_USER_SUPABASE,
     host: process.env.DB_HOST_SUPABASE,
-    database: 'postgres',
+    database: process.env.DB_NAME_SUPABASE,
     password: process.env.DB_PASSWORD_SUPABASE,
-    port: 6543
+    port: process.env.DB_PORT_SUPABASE,
 })
 
 
